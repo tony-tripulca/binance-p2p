@@ -33,19 +33,25 @@ const BASE_URL = process.env.BASE_URL;
 const ACCESS_KEY = process.env.ACCESS_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
 
+/*
+ * Function to generate Binance required signature
+ */
 function createSignature(data) {
-  return crypto
-    .createHmac("sha256", SECRET_KEY)
-    .update(data)
-    .digest("hex");
+  return crypto.createHmac("sha256", SECRET_KEY).update(data).digest("hex");
 }
 
+/*
+ * Function to convert object to query string
+ */
 function objectToQuerystring(data) {
   return Object.keys(data)
     .map((key) => key + "=" + data[key])
     .join("&");
 }
 
+/*
+ * Intercept request with Binance access key
+ */
 axios.interceptors.request.use((config) => {
   config.headers.common["X-MBX-APIKEY"] = ACCESS_KEY;
   return config;
@@ -56,21 +62,19 @@ app.get("/", function (req, res) {
 });
 
 app.get("/trade-history", async function (req, res) {
+  let endpoint = "/sapi/v1/c2c/orderMatch/listUserOrderHistory";
+
   let data = {
     tradeType: req.query.trade_type || "SELL",
     timestamp: Date.now(),
   };
 
-  let signature = createSignature(objectToQuerystring(data));
+  data.signature = createSignature(objectToQuerystring(data));
 
-  data.signature = signature;
+  let url = `${BASE_URL}${endpoint}?${objectToQuerystring(data)}`;
 
   let result = await axios
-    .get(
-      `${BASE_URL}/sapi/v1/c2c/orderMatch/listUserOrderHistory?${objectToQuerystring(
-        data
-      )}`
-    )
+    .get(url)
     .then(function (response) {
       return response.data;
     })
@@ -82,6 +86,8 @@ app.get("/trade-history", async function (req, res) {
 });
 
 app.get("/search-ads", async function (req, res) {
+  let endpoint = "/sapi/v1/c2c/ads/search";
+
   let data = {
     asset: req.query.asset || "USDT",
     fiat: req.query.fiat || "PHP",
@@ -93,15 +99,12 @@ app.get("/search-ads", async function (req, res) {
     timestamp: Date.now(),
   };
 
-  let signature = createSignature(objectToQuerystring(data));
+  data.signature = createSignature(objectToQuerystring(data));
 
-  data.signature = signature;
+  let url = `${BASE_URL}${endpoint}?${objectToQuerystring(data)}`;
 
   let result = await axios
-    .post(
-      `${BASE_URL}/sapi/v1/c2c/ads/search?${objectToQuerystring(data)}`,
-      data
-    )
+    .post(url, data)
     .then(function (response) {
       return response.data;
     })
@@ -113,22 +116,49 @@ app.get("/search-ads", async function (req, res) {
 });
 
 app.get("/order-detail", async function (req, res) {
+  let endpoint = "/sapi/v1/c2c/orderMatch/getUserOrderDetail";
+
   let data = {
     adOrderNo: req.query.adOrderNo,
     timestamp: Date.now(),
   };
 
-  let signature = createSignature(objectToQuerystring(data));
+  data.signature = createSignature(objectToQuerystring(data));
 
-  data.signature = signature;
+  let url = `${BASE_URL}${endpoint}?${objectToQuerystring(data)}`;
 
   let result = await axios
-    .post(
-      `${BASE_URL}/sapi/v1/c2c/orderMatch/getUserOrderDetail?${objectToQuerystring(
-        data
-      )}`,
-      data
-    )
+    .post(url, data)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      return error;
+    });
+
+  res.json(result);
+});
+
+app.get("/get-chats", async function (req, res) {
+  let endpoint = "/sapi/v1/c2c/chat/retrieveChatMessagesWithPagination";
+
+  if (!req.query.order_no) {
+    res.json({ err: "Required field(s): order_no" });
+  }
+
+  let data = {
+    orderNo: req.query.order_no || "",
+    page: req.query.page || 1,
+    rows: req.query.rows || 10,
+    timestamp: Date.now(),
+  };
+
+  data.signature = createSignature(objectToQuerystring(data));
+
+  let url = `${BASE_URL}${endpoint}?${objectToQuerystring(data)}`;
+
+  let result = await axios
+    .get(url)
     .then(function (response) {
       return response.data;
     })
