@@ -88,17 +88,21 @@ const p2p = new BinanceP2P({
 
 <details>
 
-<summary>fetchTradeHistory(params)</summary>
+<summary>`fetchTradeHistory(params)`</summary>
 
 - Params
 
-```json
+```
 {
   tradeType: "BUY" | "SELL"
 }
 ```
 
-TODO: document result
+- Result
+
+```
+TODO
+```
 
 </details>
 
