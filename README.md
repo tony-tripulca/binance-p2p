@@ -88,7 +88,7 @@ const p2p = new BinanceP2P({
 
 <details>
 
-<summary>**fetchTradeHistory(params)**: Returns history of P2P trades</summary>
+<summary>*fetchTradeHistory(params)*: Returns history of P2P trades</summary>
 
 - Params
 
