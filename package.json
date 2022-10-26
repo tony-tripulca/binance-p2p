@@ -4,16 +4,21 @@
   "description": "Prototype for getting trade details",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js"
   },
   "author": "tony-tripulca",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "crypto-js": "^4.1.1",
-    "crypto.js": "^3.0.0",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "js-sha256": "^0.9.0",
+    "tiny-invariant": "^1.3.1"
+  },
+  "devDependencies": {
+    "axios-logger": "^2.6.1",
+    "nodemon": "^2.0.20"
   }
 }
