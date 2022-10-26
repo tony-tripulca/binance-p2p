@@ -79,8 +79,8 @@ On this example we can use the endpoint: `/sapi/v1/c2c/orderMatch/getUserOrderDe
 
 ```js
 const p2p = new BinanceP2P({
-  accessKey: "",
-  secretKey: "",
+  accessKey: "Your binance access key here",
+  secretKey: "Your binance secret key here",
 });
 ```
 
@@ -88,7 +88,7 @@ const p2p = new BinanceP2P({
 
 <details>
 
-<summary>`fetchTradeHistory(params)`</summary>
+<summary>fetchTradeHistory(params)</summary>
 
 Returs history of P2P trades
 
@@ -108,7 +108,8 @@ TODO
 
 </details>
 
-<summary>`performP2PAdsSearch(params)`</summary>
+<details>
+<summary>```performP2PAdsSearch(params)```</summary>
 
 Returns results from currently published P2P ads.
 
@@ -131,6 +132,7 @@ TODO
 
 </details>
 
+<details>
 <summary>`fetchOrderDetail(orderNumer)`</summary>
 
 Returns order details
@@ -147,6 +149,7 @@ TODO
 
 </details>
 
+<details>
 <summary>`fetchOrderChatMessages(params)`</summary>
 
 Returns chat messages for given orderNumber
@@ -169,6 +172,7 @@ TODO
 
 </details>
 
+<details>
 <summary>`startAd(adNumber)`</summary>
 
 Marks ad as published
@@ -185,6 +189,7 @@ TODO
 
 </details>
 
+<details>
 <summary>`stopAd(adNumber)`</summary>
 
 Sets ad status as offline
