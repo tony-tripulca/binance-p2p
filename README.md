@@ -88,7 +88,7 @@ const p2p = new BinanceP2P({
 
 <details>
 
-<summary>*fetchTradeHistory(params)*: Returns history of P2P trades</summary>
+<summary><b>fetchTradeHistory(params)</b>: Returns history of P2P trades</summary>
 
 - Params
 
@@ -108,7 +108,7 @@ TODO
 
 <details>
 
-<summary>**performP2PAdsSearch(params)**: Returns results from currently published P2P ads.</summary>
+<summary><b>performP2PAdsSearch(params)</b>: Returns results from currently published P2P ads.</summary>
 
 - Params
 
@@ -131,7 +131,7 @@ TODO
 
 <details>
 
-<summary>**fetchOrderDetail(orderNumer)**: Returns order details</summary>
+<summary><b>fetchOrderDetail(orderNumer)</b>: Returns order details</summary>
 
 - Input:
 
@@ -147,7 +147,7 @@ TODO
 
 <details>
 
-<summary>**fetchOrderChatMessages(params)**: Returns chat messages for given orderNumber</summary>
+<summary><b>fetchOrderChatMessages(params)</b>: Returns chat messages for given orderNumber</summary>
 
 - Params
 
@@ -169,7 +169,7 @@ TODO
 
 <details>
 
-<summary>**startAd(adNumber)**: Marks ad as published</summary>
+<summary><b>startAd(adNumber)</b>: Marks ad as published</summary>
 
 - Input:
 
@@ -185,7 +185,7 @@ TODO
 
 <details>
 
-<summary>**stopAd(adNumber)**: Sets ad status as offline</summary>
+<summary><b>stopAd(adNumber)</b>: Sets ad status as offline</summary>
 
 - Input:
 
