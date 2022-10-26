@@ -90,6 +90,8 @@ const p2p = new BinanceP2P({
 
 <summary>`fetchTradeHistory(params)`</summary>
 
+Returs history of P2P trades
+
 - Params
 
 ```
@@ -106,9 +108,95 @@ TODO
 
 </details>
 
-- performP2PAdsSearch
-- fetchOrderDetail
-- fetchOrderChatMessages
-- startAd
-- stopAd
-- updateAd
+<summary>`performP2PAdsSearch(params)`</summary>
+
+Returns results from currently published P2P ads.
+
+- Params
+
+```
+{
+  asset: "", // e.g: "USDT"
+  fiat: "", // e.g: "USD"
+  trade_type: "BUY" | "SELL", // default: "SELL"
+  trans_amount: Number,  // default: 100
+}
+```
+
+- Result
+
+```
+TODO
+```
+
+</details>
+
+<summary>`fetchOrderDetail(orderNumer)`</summary>
+
+Returns order details
+
+- Input:
+
+  - orderNumber: String | Number
+
+- Result
+
+```
+TODO
+```
+
+</details>
+
+<summary>`fetchOrderChatMessages(params)`</summary>
+
+Returns chat messages for given orderNumber
+
+- Params
+
+```
+{
+  orderNumber: String | Number,
+  page: Number, // default: 1
+  rows: Number, // default: 10
+}
+```
+
+- Result
+
+```
+TODO
+```
+
+</details>
+
+<summary>`startAd(adNumber)`</summary>
+
+Marks ad as published
+
+- Input:
+
+  - adNumber: String | Number
+
+- Result
+
+```
+TODO
+```
+
+</details>
+
+<summary>`stopAd(adNumber)`</summary>
+
+Sets ad status as offline
+
+- Input:
+
+  - adNumber: String | Number
+
+- Result
+
+```
+TODO
+```
+
+</details>

@@ -41,6 +41,22 @@ class BinanceP2P {
     return { url, data };
   }
 
+  async _updateAd({ adNumber, status }) {
+    invariant(adNumber, "Required field: adNumber");
+
+    const { url, data } = this._createRequestPayload(URLS.UPDATE_ORDER, {
+      advNos: [adNumber],
+      advStatus: status,
+      timestamp: Date.now(),
+    });
+
+    const result = await this.http
+      .post(url, data)
+      .then((response) => response.data);
+
+    return result;
+  }
+
   async fetchTradeHistory({ tradeType }) {
     const { url } = this._createRequestPayload(URLS.TRADE_HISTORY, {
       tradeType: tradeType || ORDER_TYPES.SELL,
@@ -101,31 +117,15 @@ class BinanceP2P {
 
   // publishes the ad
   async startAd(adNumber) {
-    return this.updateAd({ adNumber, status: 1 });
+    return this._updateAd({ adNumber, status: 1 });
   }
 
   // marks the ad as offline
   async stopAd(adNumber) {
-    return this.updateAd({ adNumber, status: 3 });
+    return this._updateAd({ adNumber, status: 3 });
   }
 
   // TODO: delete ad (so funds are available again)
-
-  async updateAd({ adNumber, status }) {
-    invariant(adNumber, "Required field: adNumber");
-
-    const { url, data } = this._createRequestPayload(URLS.UPDATE_ORDER, {
-      advNos: [adNumber],
-      advStatus: status,
-      timestamp: Date.now(),
-    });
-
-    const result = await this.http
-      .post(url, data)
-      .then((response) => response.data);
-
-    return result;
-  }
 }
 
 module.exports = { BinanceP2P };
