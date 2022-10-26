@@ -109,6 +109,7 @@ TODO
 </details>
 
 <details>
+
 <summary>```performP2PAdsSearch(params)```</summary>
 
 Returns results from currently published P2P ads.
@@ -133,6 +134,7 @@ TODO
 </details>
 
 <details>
+
 <summary>`fetchOrderDetail(orderNumer)`</summary>
 
 Returns order details
@@ -150,6 +152,7 @@ TODO
 </details>
 
 <details>
+
 <summary>`fetchOrderChatMessages(params)`</summary>
 
 Returns chat messages for given orderNumber
@@ -173,6 +176,7 @@ TODO
 </details>
 
 <details>
+
 <summary>`startAd(adNumber)`</summary>
 
 Marks ad as published
@@ -190,6 +194,7 @@ TODO
 </details>
 
 <details>
+
 <summary>`stopAd(adNumber)`</summary>
 
 Sets ad status as offline
