@@ -198,3 +198,12 @@ TODO
 ```
 
 </details>
+
+### TODO
+
+- [ ] Codegen js api docs (typedoc)
+- [ ] Codegen swagger api docs (swagger-express-ts or tsoa)
+- [ ] Move express project into "example" folder
+  - & export only the binancep2p client + 'express router' in tree-shakeable manner
+  - e.g: `import { BinanceP2P } from "binance-p2p"` & `import { BinanceP2PExpressEndpoints } from "binance-p2p/express"`
+- [ ] Publish to npm
