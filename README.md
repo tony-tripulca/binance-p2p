@@ -169,6 +169,27 @@ TODO
 
 <details>
 
+<summary><b>markOrderAsPayed(params)</b>: Marks an order as payed</summary>
+
+- Params:
+
+```
+{
+  orerNumber: String,
+  payId: String
+}
+```
+
+- Result
+
+```
+TODO
+```
+
+</details>
+
+<details>
+
 <summary><b>startAd(adNumber)</b>: Marks ad as published</summary>
 
 - Input:

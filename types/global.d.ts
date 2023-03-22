@@ -39,6 +39,11 @@ declare global {
     status: number;
   }
 
+  interface MarkOrderAsPayedParams {
+    orderNumber: string;
+    payId: number;
+  }
+
   interface FetchTradeHistoryParams {
     tradeType: BinanceTradeTypes;
   }
