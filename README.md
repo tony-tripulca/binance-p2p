@@ -199,6 +199,25 @@ TODO
 
 </details>
 
+<details>
+
+<summary><b>releaseOrderFunds(adNumber)</b>: Given an order number, releases the funds</summary>
+
+- Input:
+
+  - orderNumber: String
+  - authType: "GOOGLE" | "SMS" | "FIDO2" | "FUND_PWD"
+  - confirmPaidType: "quick" | "normal"
+  - code: String
+
+- Result
+
+```
+TODO
+```
+
+</details>
+
 ### TODO
 
 - [ ] Codegen js api docs (typedoc)

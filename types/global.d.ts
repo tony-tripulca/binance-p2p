@@ -42,4 +42,16 @@ declare global {
   interface FetchTradeHistoryParams {
     tradeType: BinanceTradeTypes;
   }
+
+  interface ReleaseOrderFundsParams {
+    authType?: "GOOGLE" | "SMS" | "FIDO2" | "FUND_PWD";
+    code?: string;
+    confirmPaidType?: "quick" | "normal";
+    emailVerifyCode?: string;
+    googleVerifyCode?: string;
+    mobileVerifyCode?: string;
+    orderNumber: string;
+    payId?: number; // ad payment method id
+    yubikeyVerifyCode?: string;
+  }
 }

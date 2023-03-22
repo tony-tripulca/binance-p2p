@@ -132,5 +132,22 @@ export class BinanceP2P {
     return this._updateAd({ adNumber, status: 3 });
   }
 
+  async releaseOrderFunds(params: ReleaseOrderFundsParams) {
+    const { url, data } = this._createRequestPayload(URLS.RELEASE_ORDER_FUNDS, {
+      authType: params.authType,
+      code: params.code,
+      confirmPaidType: params.confirmPaidType,
+      emailVerifyCode: params.emailVerifyCode,
+      googleVerifyCode: params.googleVerifyCode,
+      mobileVerifyCode: params.mobileVerifyCode,
+      orderNumber: params.orderNumber,
+      payId: params.payId,
+      yubikeyVerifyCode: params.yubikeyVerifyCode,
+      timestamp: Date.now(),
+    });
+
+    return this.http.post(url, data).then((response) => response.data);
+  }
+
   // TODO: delete ad (so funds are available again)
 }
