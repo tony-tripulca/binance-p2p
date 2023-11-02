@@ -6,6 +6,7 @@ import Logger from "./util/Logger.js";
 
 import OrderController from "./controller/OrderController.js";
 import ChatController from "./controller/ChatController.js";
+import AdController from "./controller/AdController.js";
 
 function AppRoutes() {
   app.get("/", (req, res) => {
@@ -20,8 +21,20 @@ function AppRoutes() {
     OrderController.orderDetails(req, res);
   });
 
+  app.get("/can-place-order", (req, res) => {
+    OrderController.canPlaceOrder(req, res);
+  });
+
+  app.get("/place-order", (req, res) => {
+    OrderController.placeOrder(req, res);
+  });
+
   app.get("/order-chats", (req, res) => {
     ChatController.getByOrderId(req, res);
+  });
+
+  app.get("/ads-search", (req, res) => {
+    AdController.searchAds(req, res);
   });
 }
 
