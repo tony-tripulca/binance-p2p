@@ -1,8 +1,8 @@
-import sha256 from "js-sha256";
+import crypto from "crypto";
 
 const Hash = {
-  create: (secret, data) => {
-    return sha256.hmac.create(secret).update(data).hex();
+  createSignature: (secret, data) => {
+    return crypto.createHmac("sha256", secret).update(data).digest("hex");
   },
   toQueryString: (data) => {
     return Object.keys(data)
@@ -11,4 +11,4 @@ const Hash = {
   },
 };
 
-export default Hash;
+export const { createSignature, toQueryString } = Hash;
