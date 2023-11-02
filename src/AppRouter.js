@@ -11,8 +11,12 @@ function AppRoutes() {
     res.json({ service: "Binance service API" });
   });
 
-  app.get("/order-history", (req, res) => {
+  app.get("/orders", (req, res) => {
     OrderController.orderHistory(req, res);
+  });
+
+  app.get("/order-details", (req, res) => {
+    OrderController.orderDetails(req, res);
   });
 }
 
