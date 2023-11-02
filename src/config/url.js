@@ -1,16 +1,17 @@
 class URL {
-  static api() {
+  static binance() {
     let env = process.env.APP_ENV;
 
+    /** Change the links respective to environments */
     if (env === "dev") {
-      return "/";
+      return "https://api.binance.com/sapi/v1/c2c/";
     } else if (env === "uat") {
-      return "/";
+      return "https://api.binance.com/sapi/v1/c2c/";
     } else if (env === "prod") {
-      return "/";
+      return "https://api.binance.com/sapi/v1/c2c/";
     }
 
-    return "/";
+    return "https://api.binance.com/sapi/v1/c2c/";
   }
 }
 
