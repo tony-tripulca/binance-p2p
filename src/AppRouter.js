@@ -5,6 +5,7 @@ import URL from "./config/url.js";
 import Logger from "./util/Logger.js";
 
 import OrderController from "./controller/OrderController.js";
+import ChatController from "./controller/ChatController.js";
 
 function AppRoutes() {
   app.get("/", (req, res) => {
@@ -17,6 +18,10 @@ function AppRoutes() {
 
   app.get("/order-details", (req, res) => {
     OrderController.orderDetails(req, res);
+  });
+
+  app.get("/order-chats", (req, res) => {
+    ChatController.getByOrderId(req, res);
   });
 }
 
