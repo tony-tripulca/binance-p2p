@@ -8,34 +8,15 @@ import OrderController from "./controller/OrderController.js";
 import ChatController from "./controller/ChatController.js";
 import AdController from "./controller/AdController.js";
 
-function AppRoutes() {
-  app.get("/", (req, res) => {
-    res.json({ service: "Binance service API" });
-  });
+app.get("/", (req, res) => {
+  res.json({ service: process.env.APP_NAME });
+});
 
-  app.get("/orders", (req, res) => {
-    OrderController.orderHistory(req, res);
-  });
+app.get("/orders/:order_id/details", OrderController.orderDetails);
+app.get("/orders/:order_id/chats", ChatController.orderChats);
+app.get("/orders", OrderController.orderHistory);
 
-  app.get("/order-details", (req, res) => {
-    OrderController.orderDetails(req, res);
-  });
+app.get("/place-order/:ad_no/check", OrderController.placeOrderCheck);
+app.get("/place-order", OrderController.placeOrder);
 
-  app.get("/can-place-order", (req, res) => {
-    OrderController.canPlaceOrder(req, res);
-  });
-
-  app.get("/place-order", (req, res) => {
-    OrderController.placeOrder(req, res);
-  });
-
-  app.get("/order-chats", (req, res) => {
-    ChatController.getByOrderId(req, res);
-  });
-
-  app.get("/ads-search", (req, res) => {
-    AdController.searchAds(req, res);
-  });
-}
-
-AppRoutes();
+app.get("/ads/search", AdController.adsSearch);
