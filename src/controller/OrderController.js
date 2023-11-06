@@ -1,27 +1,18 @@
 import axios from "axios";
 import URL from "../config/url.js";
 import Logger from "../util/Logger.js";
-import { createSignature, toQueryString } from "../util/Hash.js";
-
-const API_KEY = process.env.BINANCE_API_KEY;
-const SECRET_KEY = process.env.BINANCE_SECRET_KEY;
+import BinanceService from "../services/BinanceService.js";
 
 const OrderController = {
   orderHistory: (req, res) => {
-    let endpoint = "orderMatch/listUserOrderHistory";
+    if (!req.query.trade_type) {
+      res.json({ required: ["trade_type"] });
+      return;
+    }
 
-    let data = {
-      tradeType: req.query.trade_type || "SELL",
+    BinanceService.orderHistory({
+      tradeType: req.query.trade_type,
       timestamp: Date.now(),
-    };
-
-    data.signature = createSignature(SECRET_KEY, toQueryString(data));
-
-    axios({
-      method: "GET",
-      baseURL: URL.binance(),
-      url: `${endpoint}?${toQueryString(data)}`,
-      headers: { "X-MBX-APIKEY": API_KEY },
     })
       .then((response) => {
         Logger.out([response]);
@@ -33,26 +24,14 @@ const OrderController = {
       });
   },
   orderDetails: (req, res) => {
-    let endpoint = "/orderMatch/getUserOrderDetail";
-
-    if (!req.query.order_id) {
-      res.json({ validation: ["order_id is required"] });
+    if (!req.params.order_id) {
+      res.json({ required: ["order_id"] });
       return;
     }
 
-    let data = {
-      adOrderNo: req.query.order_id,
+    BinanceService.orderDetails({
+      adOrderNo: req.params.order_id,
       timestamp: Date.now(),
-    };
-
-    data.signature = createSignature(SECRET_KEY, toQueryString(data));
-
-    axios({
-      method: "POST",
-      baseURL: URL.binance(),
-      url: `${endpoint}?${toQueryString(data)}`,
-      headers: { "X-MBX-APIKEY": API_KEY },
-      data: data,
     })
       .then((response) => {
         Logger.out([response]);
@@ -63,27 +42,15 @@ const OrderController = {
         res.json(error.response.data);
       });
   },
-  canPlaceOrder: (req, res) => {
-    let endpoint = "/orderMatch/checkIfCanPlaceOrder";
-
-    if (!req.query.ad_no) {
+  placeOrderCheck: (req, res) => {
+    if (!req.params.ad_no) {
       res.json({ required: ["ad_no"] });
       return;
     }
 
-    let data = {
-      adOrderNo: req.query.ad_no,
+    BinanceService.placeOrderCheck({
+      adOrderNo: req.params.ad_no,
       timestamp: Date.now(),
-    };
-
-    data.signature = createSignature(SECRET_KEY, toQueryString(data));
-
-    axios({
-      method: "POST",
-      baseURL: URL.binance(),
-      url: `${endpoint}?${toQueryString(data)}`,
-      headers: { "X-MBX-APIKEY": API_KEY },
-      data: data,
     })
       .then((response) => {
         Logger.out([response]);
@@ -95,8 +62,6 @@ const OrderController = {
       });
   },
   placeOrder: (req, res) => {
-    let endpoint = "/orderMatch/placeOrder";
-
     if (
       !req.query.ad_no ||
       !req.query.asset ||
@@ -136,7 +101,7 @@ const OrderController = {
      *
      */
 
-    let data = {
+    BinanceService.placeOrder({
       advOrderNumber: req.query.ad_no,
       area: "p2pZone",
       asset: req.query.asset,
@@ -148,16 +113,6 @@ const OrderController = {
       origin: "MAKE_TAKE",
       tradeType: req.query.trade_type,
       timestamp: Date.now(),
-    };
-
-    data.signature = createSignature(SECRET_KEY, toQueryString(data));
-
-    axios({
-      method: "POST",
-      baseURL: URL.binance(),
-      url: `${endpoint}?${toQueryString(data)}`,
-      headers: { "X-MBX-APIKEY": API_KEY },
-      data: data,
     })
       .then((response) => {
         Logger.out([response]);
